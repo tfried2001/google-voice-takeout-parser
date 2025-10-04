@@ -2,3 +2,6 @@
 
 Python module for parsing Google Voice takeout HTML files and aggregating
 them into a useful format.
+
+GUI requires installation of tkinter:
+$ sudo apt install python3-tk

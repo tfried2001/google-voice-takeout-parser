@@ -17,6 +17,9 @@ dependencies = [
   "html5lib"
 ]
 
+[project.scripts]
+google-voice-parser = "google_voice_takeout_parser.scripts.google_voice_parser:main"
+
 [project.urls]
 Source = "https://github.com/moshekaplan/google-voice-takeout-parser"
 
