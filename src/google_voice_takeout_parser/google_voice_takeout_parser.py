@@ -1,4 +1,4 @@
-import argparse
+# import argparse
 import csv
 import datetime
 import os.path
@@ -6,7 +6,7 @@ import os.path
 import html5lib
 
 
-def parse_timestamp(timestamp_text):
+def parse_timestamp(timestamp_text: str):
     # Sample value: '2022-09-30T14:36:36.127-04:00'
     # %z is the UTC offset, but in the form +/-HHMM, not HH:MM
     # To work around this, strip out the colon between them
@@ -298,6 +298,8 @@ def parse_call(data, root, filename=''):
         call_data['data_type'] = "VOICEMAIL"
         call_data['direction'] = "INCOMING"
         call_data['recipient_names'] = ["Google Voice Takeout Subject"]
+        # Not all voicemails have transcripts, so initialize to empty string
+        call_data['transcript'] = ''
         call_data['recipient_phone_numbers'] = ['']
     elif title.startswith('Recorded call with'):
         call_data['data_type'] = "RECORDED CALL"
@@ -305,6 +307,8 @@ def parse_call(data, root, filename=''):
         call_data['recipient_names'] = ["Google Voice Takeout Subject"]
         call_data['recipient_phone_numbers'] = ['']
     else:
+        # This should be unreachable, but as a safeguard, set transcript to N/A
+        call_data['transcript'] = "N/A"
         raise Exception(f"Unable to detect call direction! title: {title}")
 
     # The name and number will depend on whether it's incoming or outgoing, so
