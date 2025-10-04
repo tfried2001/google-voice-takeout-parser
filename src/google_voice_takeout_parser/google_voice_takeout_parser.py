@@ -399,7 +399,10 @@ def parse_call(data, root, filename=''):
 def parse_str(data, fname):
     root = html5lib.parse(data, namespaceHTMLElements=False)
     # Attempt to detect the file's content type based on the class
-    file_class = root.find('./body/div').attrib.get('class')
+    body_div = root.find('./body/div')
+    if body_div is None:
+        raise Exception("Could not find a 'div' inside the 'body' tag. The HTML structure may be unexpected.")
+    file_class = body_div.attrib.get('class')
     if not file_class:
         raise Exception("No file_class detected! Please submit a pull request with how this file type should be parsed")
     if file_class not in ['haudio', 'hChatLog hfeed']:
