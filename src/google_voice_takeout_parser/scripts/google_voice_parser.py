@@ -74,8 +74,11 @@ class ProcessHTML:
         tkinter.messagebox.showinfo(title='Complete!', message="Your Google Voice HTML parsing is complete!")
 
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) > 1:
         cli_main()
     else:
         gui_main()
+
+if __name__ == "__main__":
+    main()
